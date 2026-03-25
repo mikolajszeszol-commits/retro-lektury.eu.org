@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Lektury</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+</head>
+<body class="light-theme">
+
+    <div class="container">
+        <header class="app-header">
+            <h1>Retro Lektury</h1>
+            <p>Twoja biblioteka klasyki w przeglądarce</p>
+        </header>
+
+        <main>
+            <section id="library-home">
+                <h2>Wybierz książkę:</h2>
+                <div class="book-grid">
+                    <div class="book-card">
+                        <h3>Przedwiośnie</h3>
+                        <p>Stefan Żeromski</p>
+                        <button onclick="zaladujKsiazke('przedwiosnie.epub')" class="btn">Czytaj 📖</button>
+                    </div>
+
+                    <div class="book-card">
+                        <h3>Lalka</h3>
+                        <p>Bolesław Prus</p>
+                        <button onclick="zaladujKsiazke('lalka.epub')" class="btn">Czytaj 📖</button>
+                    </div>
+
+                    <div class="book-card">
+                        <h3>Quo Vadis</h3>
+                        <p>Henryk Sienkiewicz</p>
+                        <button onclick="zaladujKsiazke('quo-vadis.epub')" class="btn">Czytaj 📖</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reader-view" style="display: none;">
+                <button onclick="zamknijCzytnik()" class="btn-back">⬅ Wróć do listy</button>
+                <div id="viewer" style="width: 100%; height: 600px; background: white; margin-top: 10px;"></div>
+                <div class="reader-controls">
+                    <button onclick="poprzednia()" class="btn-nav">Poprzednia</button>
+                    <button onclick="nastepna()" class="btn-nav">Następna</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
