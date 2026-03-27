@@ -3,24 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Retro Lektury - Cyfrowa biblioteka klasyki literatury polskiej i światowej. Czytaj dzieła na każdym urządzeniu w retro stylu.">
-    <meta name="keywords" content="retro lektury, książki, literatura, ebook, epub, klasyka, polska literatura, audiobook, biblioteka">
+    
+    <meta name="description" content="Retro Lektury - Cyfrowa biblioteka klasyki literatury polskiej i światowej.">
+    <meta name="keywords" content="retro lektury, książki, literatura, ebook, epub, klasyka">
     <meta name="author" content="Retro Lektury">
+    
     <title>Retro Lektury - Cyfrowa Biblioteka Klasyki</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
 </head>
+
 <body class="light-theme">
 
     <div class="container">
+        
         <header class="app-header">
             <h1>Retro Lektury</h1>
             <p class="subtitle">Twoja cyfrowa biblioteka klasyki</p>
+            
             <input type="text" id="search-input" class="search-box" placeholder="Szukaj tytułu lub autora...">
+            
             <button id="theme-toggle" class="btn-theme">🌙 Tryb Nocny</button>
         </header>
 
@@ -33,6 +41,7 @@
             <section id="reader-view" class="hidden">
                 <div class="reader-header">
                     <button onclick="closeReader()" class="btn-back">⬅ Wróć</button>
+                    
                     <div class="reader-info">
                         <h2 id="current-reading-title">Tytuł</h2>
                         <p id="page-counter">Wczytywanie...</p>
@@ -40,6 +49,7 @@
                 </div>
                 
                 <div id="output-content" class="reader-content"></div>
+                
                 <div id="epub-viewer" class="hidden"></div>
 
                 <div id="reader-nav" class="reader-nav hidden">
