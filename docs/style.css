@@ -1,82 +1,201 @@
+/* 1. DEFINICJA KOLORÓW (Zmienne)
+   Tutaj ustalamy "paletę barw" dla obu trybów. 
+   Dzięki temu nie musimy wpisywać kodów kolorów (np. #e8dcc4) w każdym miejscu osobno.
+*/
+
+/* Kolory dla trybu jasnego - odcienie beżu i brązu (styl retro/papierowy) */
 .light-theme {
-    --bg: #e8dcc4; --card: #f5ede0; --text: #2b1810; --text-sub: #6b5344; 
-    --accent: #8b5a2b; --shadow: rgba(43, 24, 16, 0.15);
-}
-.dark-theme {
-    --bg: #3d2817; --card: #5c3d2e; --text: #f5ede0; --text-sub: #c4a787; 
-    --accent: #d4a574; --shadow: rgba(0, 0, 0, 0.6);
+    --bg: #e8dcc4;        /* Tło strony */
+    --card: #f5ede0;      /* Tło kart książek */
+    --text: #2b1810;      /* Główny kolor tekstu */
+    --text-sub: #6b5344;  /* Kolor podtytułów i autorów */
+    --accent: #8b5a2b;    /* Kolor przycisków i akcentów */
+    --shadow: rgba(43, 24, 16, 0.15); /* Cień pod kartami */
 }
 
+/* Kolory dla trybu ciemnego - odcienie ciemnego drewna i kawy */
+.dark-theme {
+    --bg: #3d2817; 
+    --card: #5c3d2e; 
+    --text: #f5ede0; 
+    --text-sub: #c4a787; 
+    --accent: #d4a574; 
+    --shadow: rgba(0, 0, 0, 0.6);
+}
+
+/* 2. USTAWIENIA OGÓLNE 
+*/
+
+/* Sprawia, że każda zmiana koloru czy cienia dzieje się płynnie, a nie skokowo */
 * {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 body {
-    background-color: var(--bg); color: var(--text);
+    background-color: var(--bg);
+    color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    margin: 0; transition: background 0.3s, color 0.3s;
+    margin: 0;
 }
-.container { max-width: 850px; margin: 0 auto; padding: 20px; }
-.hidden { display: none !important; }
 
-.app-header { text-align: center; padding: 30px 0; }
-h1 { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; margin: 0; letter-spacing: -1px; }
+/* Główny kontener trzymający treść na środku (max 850px szerokości) */
+.container { 
+    max-width: 850px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+
+/* Klasa pomocnicza do ukrywania elementów (np. czytnika, gdy jesteśmy w menu) */
+.hidden { 
+    display: none !important; 
+}
+
+/* 3. NAGŁÓWEK I WYSZUKIWARKA 
+*/
+
+.app-header { 
+    text-align: center; 
+    padding: 30px 0; 
+}
+
+h1 { 
+    font-family: 'Playfair Display', serif; /* Elegancka czcionka szeryfowa */
+    font-size: 3rem; 
+    font-weight: 900; 
+    margin: 0; 
+    letter-spacing: -1px; 
+}
+
 .search-box {
-    width: 100%; max-width: 400px; padding: 12px 18px; margin: 15px 0;
-    border: 2px solid var(--accent); border-radius: 8px;
-    background: var(--card); color: var(--text); font-size: 1rem;
-    font-family: inherit; transition: all 0.3s ease;
+    width: 100%; 
+    max-width: 400px; 
+    padding: 12px 18px; 
+    margin: 15px 0;
+    border: 2px solid var(--accent); 
+    border-radius: 8px;
+    background: var(--card); 
+    color: var(--text); 
+    font-size: 1rem;
+    font-family: inherit;
 }
+
+/* Efekt świecenia wyszukiwarki po kliknięciu */
 .search-box:focus {
-    outline: none; box-shadow: 0 0 10px rgba(139, 90, 43, 0.3);
+    outline: none; 
+    box-shadow: 0 0 10px rgba(139, 90, 43, 0.3);
 }
-.dark-theme .search-box:focus {
-    box-shadow: 0 0 10px rgba(212, 165, 116, 0.3);
-}
+
 .btn-theme {
-    background: var(--accent); color: white; border: none;
-    padding: 10px 22px; border-radius: 10px; cursor: pointer;
-    font-weight: 600; margin-top: 15px;
+    background: var(--accent); 
+    color: white; 
+    border: none;
+    padding: 10px 22px; 
+    border-radius: 10px; 
+    cursor: pointer;
+    font-weight: 600; 
+    margin-top: 15px;
 }
+
+/* 4. SIATKA KSIĄŻEK (BIBLIOTEKA) 
+*/
 
 .book-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 20px; margin-top: 30px;
+    display: grid; 
+    /* Automatycznie układa tyle kolumn, ile się zmieści (min. 170px każda) */
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px; 
+    margin-top: 30px;
 }
+
 .book-card {
-    background: var(--card); padding: 25px 20px; border-radius: 10px;
-    text-align: center; cursor: pointer; box-shadow: 0 4px 15px var(--shadow);
-    display: flex; flex-direction: column; justify-content: space-between;
-    transition: transform 0.2s; min-height: 150px;
+    background: var(--card); 
+    padding: 25px 20px; 
+    border-radius: 10px;
+    text-align: center; 
+    cursor: pointer; 
+    box-shadow: 0 4px 15px var(--shadow);
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    min-height: 150px;
 }
-.book-card:hover { transform: translateY(-5px); }
-.author-label { color: var(--text-sub); font-size: 0.9rem; margin-top: 8px; font-style: italic; }
-.read-badge { color: var(--accent); font-weight: bold; font-size: 0.85rem; margin-top: 15px; }
 
-.reader-header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
-.reader-info h2 { margin: 0; font-size: 1.3rem; }
-#page-counter { margin: 0; font-size: 0.85rem; color: var(--text-sub); }
-.btn-back { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 2px; cursor: pointer; font-weight: 600; }
+/* Delikatne uniesienie karty po najechaniu myszką */
+.book-card:hover { 
+    transform: translateY(-5px); 
+}
 
+.author-label { 
+    color: var(--text-sub); 
+    font-size: 0.9rem; 
+    margin-top: 8px; 
+    font-style: italic; 
+}
+
+/* 5. CZYTNIK 
+*/
+
+.reader-header { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+    margin-bottom: 25px; 
+}
+
+/* Kontener na sam tekst książki */
 .reader-content { 
-    background: var(--card); padding: 35px; border-radius: 15px; 
-    font-size: 20px; line-height: 1.8; text-align: justify; white-space: pre-wrap;
+    background: var(--card); 
+    padding: 35px; 
+    border-radius: 15px; 
+    font-size: 20px; 
+    line-height: 1.8; /* Większy odstęp między liniami dla łatwiejszego czytania */
+    text-align: justify; 
+    white-space: pre-wrap; /* Zachowuje entery w tekście */
 }
 
+/* Kontener specjalnie dla plików EPUB */
 #epub-viewer {
-    background: var(--card); height: 75vh; border-radius: 15px; 
-    overflow: hidden; box-shadow: 0 4px 20px var(--shadow);
+    background: var(--card); 
+    height: 75vh; /* 75% wysokości ekranu */
+    border-radius: 15px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 20px var(--shadow);
 }
 
-.reader-nav { display: flex; justify-content: space-between; margin-top: 20px; gap: 15px; }
-.btn-nav { flex: 1; background: var(--accent); color: white; border: none; padding: 18px; border-radius: 5px; font-weight: 600; cursor: pointer; font-size: 1.1rem; }
+.reader-nav { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 20px; 
+    gap: 15px; 
+}
+
+.btn-nav { 
+    flex: 1; 
+    background: var(--accent); 
+    color: white; 
+    border: none; 
+    padding: 18px; 
+    border-radius: 5px; 
+    font-weight: 600; 
+    cursor: pointer; 
+}
+
+/* 6. STOPKA I RESPONSYWNOŚĆ 
+*/
 
 .app-footer { 
-    text-align: center; margin-top: 60px; padding: 30px 0; 
-    border-top: 1px solid rgba(43, 24, 16, 0.2); color: var(--text-sub); font-size: 0.9rem;
+    text-align: center; 
+    margin-top: 60px; 
+    padding: 30px 0; 
+    border-top: 1px solid rgba(43, 24, 16, 0.2); 
+    color: var(--text-sub); 
+    font-size: 0.9rem;
 }
-.app-footer a { color: var(--accent); text-decoration: none; font-weight: 600; transition: opacity 0.2s; }
-.app-footer a:hover { opacity: 0.8; text-decoration: underline; }
-.dark-theme .app-footer { border-top-color: rgba(212, 165, 116, 0.2); }
 
-@media (max-width: 600px) { .book-grid { grid-template-columns: repeat(2, 1fr); } }
+/* Ustawienia dla telefonów (ekran węższy niż 600px) */
+@media (max-width: 600px) { 
+    .book-grid { 
+        /* Na małym ekranie wymuszamy dokładnie dwie kolumny obok siebie */
+        grid-template-columns: repeat(2, 1fr); 
+    } 
+}
