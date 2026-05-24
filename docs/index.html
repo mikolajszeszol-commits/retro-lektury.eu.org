@@ -3,67 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Retro Lektury - Cyfrowa biblioteka klasyki literatury polskiej i światowej.">
-    <meta name="keywords" content="retro lektury, książki, literatura, ebook, epub, klasyka">
-    <meta name="author" content="Retro Lektury">
-    
-    <title>Retro Lektury - Cyfrowa Biblioteka Klasyki</title>
+    <title>Pobieralnia Aplikacji</title>
+    <style>
+        /* Reset podstawowych marginesów */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; /* Ciemne tło główne */
+            color: #e0e0e0;           /* Jasny, niemęczący oczu tekst */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 10px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        p {
+            color: #aaaaaa;
+            font-size: 1.1rem;
+        }
+
+        /* Kontener siatki 3x3 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px; /* Odstępy między przyciskami */
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            justify-items: center;
+        }
+
+        /* Styl kwadratowych przycisków (ok. 4cm x 4cm na standardowych ekranach) */
+        .app-button {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* 150px odpowiada w przybliżeniu około 4cm na większości ekranów desktopowych/mobilnych */
+            width: 150px;
+            height: 150px;
+            background-color: #1e1e1e; /* Nieco jaśniejszy szary dla przycisku */
+            color: #ffffff;
+            text-decoration: none;
+            border: 2px solid #333333;
+            border-radius: 8px; /* Delikatne zaokrąglenie dla nowoczesnego wyglądu, zmień na 0 dla idealnego prostokąta */
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        /* Efekty po najechaniu myszką */
+        .app-button:hover {
+            background-color: #292929;
+            border-color: #00adb5; /* Akcent kolorystyczny (np. morski) */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 173, 181, 0.2);
+        }
+
+        /* Ikona lub strzałka pobierania pod tekstem */
+        .app-button::after {
+            content: "⬇";
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #00adb5;
+        }
+
+        footer {
+            margin-top: 50px;
+            color: #555555;
+            font-size: 0.9rem;
+        }
+
+        /* Responsywność dla mniejszych ekranów (smartfony) */
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 kolumny na telefonach */
+                gap: 15px;
+            }
+            .app-button {
+                width: 130px;
+                height: 130px;
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 400px) {
+            .grid-container {
+                grid-template-columns: 1fr; /* 1 kolumna na bardzo małych ekranach */
+            }
+        }
+    </style>
 </head>
+<body>
 
-<body class="light-theme">
+    <header>
+        <h1>Panel Pobierania Aplikacji</h1>
+        <p>Wybierz kafelka, aby pobrać paczkę ZIP z programem</p>
+    </header>
 
-    <div class="container">
+    <div class="grid-container">
         
-        <header class="app-header">
-            <h1>Retro Lektury</h1>
-            <p class="subtitle">Twoja cyfrowa biblioteka klasyki</p>
-            
-            <input type="text" id="search-input" class="search-box" placeholder="Szukaj tytułu lub autora...">
-            
-            <button id="theme-toggle" class="btn-theme">🌙 Tryb Nocny</button>
-        </header>
+        <!-- PRZYCISK 1 -->
+        <a href="sciezka/do/pliku1.zip" download class="app-button">
+            Nazwa Aplikacji 1
+        </a>
 
-        <main>
-            <section id="library-home">
-                <h2 class="section-title">Twoje Książki:</h2>
-                <div id="book-list" class="book-grid"></div>
-            </section>
-            
-            <section id="reader-view" class="hidden">
-                <div class="reader-header">
-                    <button onclick="closeReader()" class="btn-back">⬅ Wróć</button>
-                    
-                    <div class="reader-info">
-                        <h2 id="current-reading-title">Tytuł</h2>
-                        <p id="page-counter">Wczytywanie...</p>
-                    </div>
-                </div>
-                
-                <div id="output-content" class="reader-content"></div>
-                
-                <div id="epub-viewer" class="hidden"></div>
+        <!-- PRZYCISK 2 -->
+        <a href="sciezka/do/pliku2.zip" download class="app-button">
+            Nazwa Aplikacji 2
+        </a>
 
-                <div id="reader-nav" class="reader-nav hidden">
-                    <button id="prev-page" class="btn-nav">⬅ Poprzednia</button>
-                    <button id="next-page" class="btn-nav">Następna ➡</button>
-                </div>
-            </section>
-        </main>
+        <!-- PRZYCISK 3 -->
+        <a href="sciezka/do/pliku3.zip" download class="app-button">
+            Nazwa Aplikacji 3
+        </a>
 
-        <footer class="app-footer">
-            <p>Projekt <strong>Retro Lektury</strong> autorstwa <strong>Mikołaj Szęszoł</strong> • Książki pochodzą z serwisu <a href="https://wolnelektury.pl" target="_blank">Wolne Lektury</a></p>
-        </footer>
+        <!-- PRZYCISK 4 -->
+        <a href="sciezka/do/pliku4.zip" download class="app-button">
+            Nazwa Aplikacji 4
+        </a>
+
+        <!-- PRZYCISK 5 -->
+        <a href="sciezka/do/pliku5.zip" download class="app-button">
+            Nazwa Aplikacji 5
+        </a>
+
+        <!-- PRZYCISK 6 -->
+        <a href="sciezka/do/pliku6.zip" download class="app-button">
+            Nazwa Aplikacji 6
+        </a>
+
+        <!-- PRZYCISK 7 -->
+        <a href="sciezka/do/pliku7.zip" download class="app-button">
+            Nazwa Aplikacji 7
+        </a>
+
+        <!-- PRZYCISK 8 -->
+        <a href="sciezka/do/pliku8.zip" download class="app-button">
+            Nazwa Aplikacji 8
+        </a>
+
+        <!-- PRZYCISK 9 -->
+        <a href="sciezka/do/pliku9.zip" download class="app-button">
+            Nazwa Aplikacji 9
+        </a>
+
     </div>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2026 Twoja Firma / Projekt</p>
+    </footer>
+
 </body>
 </html>
